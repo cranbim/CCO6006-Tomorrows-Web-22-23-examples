@@ -1,0 +1,19 @@
+{
+  "rabbits": [
+    {
+      "name": "Matty",
+      "age": 4,
+      "colour": "grey"
+    },
+    {
+      "name": "Noodle",
+      "age": 6,
+      "colour": "white"
+    },
+    {
+      "name": "Blossom",
+      "age": 5,
+      "colour": "agouti"
+    }
+  ]
+}
