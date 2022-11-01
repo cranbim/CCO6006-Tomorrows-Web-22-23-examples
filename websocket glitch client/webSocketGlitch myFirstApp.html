@@ -1,0 +1,58 @@
+<html>
+<head>
+
+<script>
+	var connection = new WebSocket('wss://cco6006-tomorrows-web-test.glitch.me/');
+	var dataPoints=[];
+
+	connection.onopen = function () {
+		console.log("I am connected to the server");
+	};
+
+	connection.onerror = function (error) {
+		console.log('WebSocket Error ', error);
+	};
+
+	function tryParseJSONObject (jsonString){
+		try {
+			var o = JSON.parse(jsonString);
+			if (o && typeof o === "object") {
+				return o;
+			}
+		}
+		catch (e) { }
+
+		return false;
+	};
+
+	connection.onmessage = function (e) {
+		let parsed=tryParseJSONObject(e.data);
+		console.log('I received: ', parsed?parsed:e.data);
+		if(parsed.appID && parsed.appID=="DavesApp"){
+			console.log("Ths is my data")
+		} else {
+			console.log("not mine")
+		}
+	};
+
+	function sendData(){
+		let message={
+			appID: "DavesApp",
+			data:{
+				name: "Dave",
+				age: 53
+			}
+		}
+		console.log('I am sending :'+message);
+		connection.send(JSON.stringify(message));
+	}
+
+
+</script>
+
+</head>
+<body>
+Websocket my fist App:<br/>
+<button onclick="sendData();">click to send</button>
+</body>
+</html>
