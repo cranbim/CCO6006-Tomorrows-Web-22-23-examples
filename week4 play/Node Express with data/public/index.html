@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simple page with data from express server</h1>
+    <h3><a href="page2.html">check out my other page</a></h3>
+    <button onclick="postData()">click to send data</button>
+    <button onclick="fetchData()">click to fetch data</button>
+    <script>
+
+
+        function postData(){
+            let data={
+                name: "Dave",
+                jobs: ['lecturer', 'creative technologist', 'artist']
+            }
+            let options={
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+            fetch('/api',options)
+            .then(response=>response.json())
+            .then(serverData=>handleDataFromServer(serverData))
+            // .then(serverData=>console.log(serverData))
+           
+        }
+
+        function fetchData(){
+            fetch('/data')
+                .then(response=>response.json())
+                .then(fetchedData=>handleDataFromServer(fetchedData))
+        }
+
+        function handleDataFromServer(data){
+            console.log('received from server ...')
+            console.log(data)
+        }
+    </script>
+</body>
+</html>
