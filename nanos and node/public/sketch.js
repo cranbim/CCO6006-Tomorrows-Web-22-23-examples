@@ -33,13 +33,16 @@ connection.onmessage = function (e) {
 
 // The serviceUuid must match the serviceUuid of the device you would like to connect
 const serviceUuids = [
-  "19b10010-e8f2-537e-4f6c-d104768a1214",
-  "19b10010-e8f2-537e-4f6c-d104768a1215"
+  // "19b10010-e8f2-537e-4f6c-d104768a1214",
+  // "19b10010-e8f2-537e-4f6c-d104768a1215",
+  "6920b5f4-5df2-11ed-9b6a-0242ac120002",
+  "6920c3dc-5df2-11ed-9b6a-0242ac120002"
 ]
 // let myCharacteristic;
 // let myValue = 0;
 // let myBLE;
 let bles=[];
+let currentBle=0;
 
 function setup() {
   colorMode(HSB, 255);
@@ -104,8 +107,8 @@ function draw() {
     }
 }
 
-function Nano33BLEData(id_,serviceUuid,label){
-
+function Nano33BLEData(id,serviceUuid,label){
+    let me=this
     this.connectButton = createButton('Connect')
     this.connectButton.mousePressed(connectToBle)
     let ble=new p5ble()
@@ -130,8 +133,11 @@ function Nano33BLEData(id_,serviceUuid,label){
   function gotValue(error, value) {
     if (error) console.log('error: ', error);
     console.log('value: ', value);
-    connection.send(JSON.stringify({value:value}));
-    this.value = value;
+    connection.send(JSON.stringify({
+      deviceID: id,
+      value:value
+    }));
+    me.value = value;
     // After getting a value, call p5ble.read() again to get the value again
     ble.read(this.characteristic, gotValue);
   }
