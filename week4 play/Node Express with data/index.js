@@ -19,3 +19,4 @@ app.get('/data', (request, response)=>{
         data: [0,1,2,3,4]
     })
 })
+
