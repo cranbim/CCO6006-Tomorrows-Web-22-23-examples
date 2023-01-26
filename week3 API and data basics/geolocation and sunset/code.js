@@ -15,9 +15,11 @@ function getSunriseSunset(lat, lon){
         'lat='+lat+
         '&lng='+lon+
         '&date=today'
+        console.log(query)
     fetch(query)
         .then(response=>response.json())
         .then(data=>{
+            // console.log(data)
             console.log("sunrise: "+data.results.sunrise)
             console.log("sunset: "+data.results.sunset)
         })

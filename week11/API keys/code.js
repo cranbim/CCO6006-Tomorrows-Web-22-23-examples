@@ -6,6 +6,6 @@ let apiQueryURL=myURLBase+"?api_key="+myVisibleAPIkey
 
 console.log(apiQueryURL)
 
-apiQueryURL=myURLBase+"?api_key="+mySecretAPIKey
+// apiQueryURL=myURLBase+"?api_key="+mySecretAPIKey
 
 console.log(apiQueryURL)
